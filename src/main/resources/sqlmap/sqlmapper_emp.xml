@@ -1,12 +1,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.first_spring.mapper.MainMapper">
+<mapper namespace="com.example.first_spring.mapper.EmpMapper">
 	<select id="getEmpList" resultType="EmpVO">
 		SELECT empno,ename,job FROM emp
 	</select>
 		<select id="getEmp" resultType="EmpVO">
 	SELECT ename FROM emp
-	WHERE empno = 7499
+	WHERE empno = #{empNo}
+	
 	</select>
+	
+	<select id="getCommNullList" resultType="EmpVO">
+	Select * from emp
+	where comm is null
+	</select>
+	
+	<select id="getLList" resultType="EmpVO">
+	select ename, comm from emp
+	where ename like "%LL%"
+	
+	
+	</select>
+	
+	<select id="getHiredate" resultType="EmpVO">
+	select ename, hiredate from emp e
+	where hiredate between '1980-12-17' and '1982-01-23'
+	</select>
+	
+	<select id="getJobManager" resultType="EmpVO">
+	select ename from emp
+	where job = #{job} 
+		and
+		  sal >= #{sal}
+	</select>
+	
+	<select id="getDeptSalList" resultType="EmpVO">
+	select ename, sal from emp
+	where deptno = 10 or deptno = 30
+	</select>
+	
+	<select id="getMGRnullList" resultType="EmpVO">
+	select * from emp
+	where MGR is null
+	</select>
+	
+	<select id="get1987hireList" resultType="EmpVO">
+	select ename , hiredate from emp
+	where DATE_FORMAT(HIREDATE,'%Y') = #{year}
+	
+	
+	</select>
+	<select id="getMaxSalEmpno" resultType="EmpVO">
+	select ename, job 
+	from ( 
+	select max(sal) as maxSal 
+	from emp
+	where DATE_FORMAT(HIREDATE,'%m') = '12') as e,
+	emp
+	where sal = e.maxSal
+	and date_format(HIREDATE,'%m') = '12'
+	</select>
+	
+	<select id="getFastEmpList" resultType="EmpVO">
+	select e.ename , e.hiredate , e.sal from 
+	(select min(hiredate), hiredate from emp
+	group by hiredate) as e, emp
+	where job = #{job}
+
+	</select>
+
 
 	
 </mapper>
