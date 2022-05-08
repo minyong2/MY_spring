@@ -5,7 +5,7 @@
 	</select>
 		<select id="getEmp" resultType="EmpVO">
 	SELECT ename FROM emp
-	WHERE empno = #{empNo}
+	WHERE empno = #{empNo}  
 	
 	</select>
 	
