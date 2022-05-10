@@ -125,7 +125,7 @@ public class EmpController {
 	//board?page=1&pageSize=10&writer=김민영
 	//쿼리에서 pageSize는 limit으로 가능
 	//but 데이터수가 너무많을때(ex 1억) between을 써야 함
-	@GetMapping("/board")
+	@GetMapping("/board") 
 	public int callBoard(@RequestParam("page") int page,
 			@RequestParam("pageSize") int pageSize,
 			@RequestParam("writer") String writer) {

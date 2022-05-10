@@ -2,7 +2,7 @@ package com.example.first_spring.vo;
 
 import lombok.Data;
 
-@Data
+@Data 
 public class EmpVO {
 	private String ename;
 	private String job;

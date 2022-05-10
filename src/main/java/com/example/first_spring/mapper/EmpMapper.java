@@ -32,7 +32,7 @@ public interface EmpMapper {
 	public List<EmpVO> get1987hireList(int year);
 	
 	public List<EmpVO> getMaxSalEmpno(int month);
-	
+	 
 	public EmpVO getFastEmpList(String job);
 	
 	public List<EmpVO> getJobManager(

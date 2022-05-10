@@ -107,7 +107,7 @@ public class EmpService {
 		//몇행 insert가 되었는지 리턴
 		int rows = empMapper.inserEmp(vo); 
 		return rows;
-	}
+	} 
 	
 	@Transactional(rollbackFor = {Exception.class})
 	public int getEmpRemoveCount(int sal) {

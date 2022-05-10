@@ -110,8 +110,8 @@
 	<select id="getsal" resultType="EmpVO">
 	select * from emp
 	where sal > #{sal}
-	</select>
-	
+	</select> 
+	 
 	<!--1. integer,String  2.VO   -->
 	<select id="selectDeptNo" resultType="EmpVO">
 	SELECT d.DEPTNO FROM emp AS e
