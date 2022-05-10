@@ -10,8 +10,8 @@ public class EmpVO {
 	private int month;
 	private int comm;
 	private int empno;
-//	private int empNo;
 	private int sal;
 	private int year;
+	private int deptno;
 
 }

@@ -3,4 +3,22 @@
 <select id="getDeptList" resultType="DeptVO">
 	Select * from dept
 </select>
+
+<update id="updateDept">
+update dept
+set 
+	dname = #{dname},
+	loc = #{loc}
+where
+	deptno = #{deptno}
+</update>
+
+<delete id="deleteDept">
+delete from dept
+where deptno = #{deptno}
+</delete>
+
+
+
+
 </mapper>

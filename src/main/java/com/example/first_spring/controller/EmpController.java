@@ -3,8 +3,13 @@ package com.example.first_spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.first_spring.service.EmpService;
@@ -27,10 +32,10 @@ public class EmpController {
 		return empService.getEmp(empNo);
 	}
 	
-	@GetMapping("/emp/name")
-	public List<EmpVO> callLList(){
-		return empService.getLList();
-	}
+//	@GetMapping("/emp/name")
+//	public List<EmpVO> callLList(){
+//		return empService.getLList();
+//	}
 	
 	@GetMapping("/emp/comm")
 	public List<EmpVO> callCommNullList(){
@@ -82,8 +87,58 @@ public class EmpController {
 	public EmpVO callFastEmpList(@PathVariable("job") String job) {
 		return empService.getFastEmpList(job);
 	}
-	
-	
-	
 
+	
+	//emp테이블에 insert 해보기
+	//@RequestBody가 파라미터로 넘어오는 VO를 대신 new 해줌
+	@PostMapping("/emp")
+	public int callEmpSet(@RequestBody EmpVO empvo) {
+		System.out.println("사원 이름은 : " + empvo.getEname());
+		System.out.println("사원 번호는 : " + empvo.getEmpno());
+		System.out.println("사원 직업은 : " + empvo.getJob());
+		return empService.setEmp(empvo);
+	}
+	
+	//@DeleteMapping : 데이터 삭제 시 사용
+	@DeleteMapping("/emp/sal/{sal}")
+	public int callEmpRemove(@PathVariable("sal") int sal) {
+		
+		return empService.getEmpRemoveCount(sal);
+	}
+	
+	//	@PatchMapping : 자원 수정할 때 사용
+	@PatchMapping("/emp")
+	public int callEmpUpdate(@RequestBody EmpVO empvo) {
+		
+		return empService.getEmpUpdateCount(empvo);
+	}
+	//쿼리스트링으로 getmapping
+	//tire?region=kr
+	//검색할 때 많이 사용
+	@GetMapping("/tier")
+	public String callTier(
+			@RequestParam("region") String region
+			,@RequestParam("name") String name) {
+		return region+","+name;
+	}
+	
+	//board?page=1&pageSize=10&writer=김민영
+	//쿼리에서 pageSize는 limit으로 가능
+	//but 데이터수가 너무많을때(ex 1억) between을 써야 함
+	@GetMapping("/board")
+	public int callBoard(@RequestParam("page") int page,
+			@RequestParam("pageSize") int pageSize,
+			@RequestParam("writer") String writer) {
+		System.out.println("현재 페이지는"+page);
+		System.out.println("한 페이지에 보여주는 row 수는 " + pageSize);
+		System.out.println("작성자는 "+writer);
+		return 0;
+	}
+	
+	@GetMapping("/emp/name")
+	public int callgetCountNameA(
+			@RequestParam("search") String search ){
+		return empService.getCountNameA(search);
+	}
+	
 }

@@ -17,21 +17,28 @@
 	<select id="getLList" resultType="EmpVO">
 	select ename, comm from emp
 	where ename like "%LL%"
-	
-	
 	</select>
 	
 	<select id="getHiredate" resultType="EmpVO">
 	select ename, hiredate from emp e
-	where hiredate between '1980-12-17' and '1982-01-23'
+	where hiredate 
+	between 
+		'1980-12-17' 
+	and 
+		'1982-01-23'
 	</select>
 	
-	<select id="getJobManager" resultType="EmpVO">
-	select ename from emp
+ 	<select id="getJobManager" resultType="EmpVO">
+	select 
+		ename,
+		empno,
+		job,
+		comm
+	from emp
 	where job = #{job} 
 		and
 		  sal >= #{sal}
-	</select>
+	</select> 
 	
 	<select id="getDeptSalList" resultType="EmpVO">
 	select ename, sal from emp
@@ -67,6 +74,59 @@
 	where job = #{job}
 
 	</select>
+	<!-- 오라클은 mybatis insert할 때 pk 문법이 다름(시퀀스를 추가해야함)  구글링 해보기-->
+	<insert id="inserEmp">
+	
+	Insert into emp
+	(
+		empno,ename,deptno,hiredate
+		
+	)
+	VALUES
+	(
+		#{empno},	
+		#{ename},
+		#{deptno},
+		now()
+	)
+	
+	</insert>
+	
+	<delete id="deleteEmp">
+	
+	delete from emp
+	where sal >= #{sal}
+	
+	</delete>
+	
+	<update id="updateEmp">
+	update emp
+	set comm = #{comm}
+	where job = #{job}
+		  and sal > #{sal}
+	</update>
+	
+	
+	<select id="getsal" resultType="EmpVO">
+	select * from emp
+	where sal > #{sal}
+	</select>
+	
+	<!--1. integer,String  2.VO   -->
+	<select id="selectDeptNo" resultType="EmpVO">
+	SELECT d.DEPTNO FROM emp AS e
+	RIGHT JOIN dept AS d 
+	ON e.DEPTNO = d.DEPTNO 
+	WHERE e.EMPNO IS NULL 
+	<!-- 출력문이 단일행이라 EmpVO . 복수행?이었으면 List<EmpVO> -->
+	</select>
+	
+	<select id="getCountNameA" resultType="EmpVO">
+	select * from emp
+	where ename like concat(#{ename},'%')
+	</select>
+	
+
 
 
 	

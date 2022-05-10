@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class DeptVO {
-	private int DEPTNO;
-	private String DNAME;
-	private String LOC;
+	private int deptno;
+	private String dname;
+	private String loc;
 
 }

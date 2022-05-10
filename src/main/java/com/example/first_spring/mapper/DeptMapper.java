@@ -10,4 +10,7 @@ import com.example.first_spring.vo.DeptVO;
 public interface DeptMapper {
 	public List<DeptVO> getDeptList();
 
+	public int updateDept(DeptVO deptvo);
+	
+	public int deleteDept(int deptno);
 }
