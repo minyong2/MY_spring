@@ -126,6 +126,66 @@
 	where ename like concat(#{ename},'%')
 	</select>
 	
+	<select id="selectEmpMgr" resultType="EmpVO">
+	SELECT 
+		ename,
+		empno,
+		mgr
+	FROM emp e
+	WHERE 1=1
+	<if test='isMgr.equals("true")'>
+		AND mgr IS NOT NULL
+	</if>
+	<if test='isMgr.equals("false")'>
+		AND mgr IS NULL
+	</if>
+	</select>
+	
+	<select id="getTest1" resultType="EmpVO">
+	SELECT * FROM emp
+	WHERE empno = #{empno}
+	</select>
+	
+	<update id="updateTest1">
+	update emp
+	set job = #{job}
+		, sal = #{sal}
+	where empno = #{empno}
+	</update>
+	
+	<update id="updateTest2">
+	update emp
+	set comm = 500
+	where 1=1
+	<if test='isTest.equals("true")'>
+		AND comm IS NOT NULL
+	</if>
+	<if test='isTest.equals("false")'>
+		AND comm IS NULL	
+	</if>
+	</update>
+	
+	<select id="selectEmpNo" resultType="EmpVO">
+	select * from emp
+	where empno = #{empno} and comm = 0 or comm is null
+	</select>
+	
+	<select id="selectEmpCommSal" resultType="EmpVO">
+	SELECT
+		empno,
+		comm,
+		sal
+	FROM emp
+	WHERE empno = #{empno}	
+	</select>
+	
+	<update id="updateEmpSal">
+	UPDATE emp
+	SET sal = #{sal}
+	WHERE empno = #{empno}
+	
+	</update>
+	
 
 
 

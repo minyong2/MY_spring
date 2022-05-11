@@ -141,4 +141,26 @@ public class EmpController {
 		return empService.getCountNameA(search);
 	}
 	
+	@GetMapping("/emp/mgr/{isMgr}")
+	public List<EmpVO> callEmpMgr(@PathVariable("isMgr") String isMgr){
+		
+		return empService.getEmpMgr(isMgr);
+	}
+	
+	@PatchMapping("/emp/update")
+	public int updateTest1(@RequestBody EmpVO vo) {
+		return empService.updateTest1(vo);
+	}
+	
+	
+	@PatchMapping("/emp/empno/{empno}")
+	public int callEmpSalUpdate(@PathVariable("empno") int empno) {
+		
+		return empService.getEmpUpdateCommSal(empno);
+		
+	}
+	
+	
+	
+	
 }

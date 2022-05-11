@@ -49,6 +49,18 @@ public interface EmpMapper {
 	
 	public List<EmpVO> getCountNameA(String ename);
 	
+	public List<EmpVO> selectEmpMgr(@Param("isMgr") String isMgr);
+	
+	public int updateTest1(EmpVO vo);
+	
+	public EmpVO selectEmpNo();
+	
+	public EmpVO selectEmpCommSal(@Param("empno") int empno);
+	//empno 조회하는거라 EmpVO ! EmpVO는 PK니까!
+	
+	public int updateEmpSal(EmpVO vo);
+	
+	
 	
 	
 	

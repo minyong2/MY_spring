@@ -139,8 +139,26 @@ public class EmpService {
 		List<EmpVO> list = empMapper.getCountNameA(ename);
 			
 		return list.size();
-		
-		
+		}
+	
+	public List<EmpVO> getEmpMgr(String isMgr){
+		return empMapper.selectEmpMgr(isMgr);
 	}
 
+	public int updateTest1(EmpVO vo) {
+		return empMapper.updateTest1(vo);
+	}
+	
+	public int getEmpUpdateCommSal(int empno) {
+		//COMM이 0혹은 null이면
+		EmpVO vo = empMapper.selectEmpCommSal(empno);
+		int comm = vo.getComm();
+		if(comm == 0) {
+			int bonus = 500;
+			int sal = vo.getSal();
+			vo.setSal(sal+bonus);
+			return empMapper.updateEmpSal(vo);
+		}
+		return 0;
+	}
 }
