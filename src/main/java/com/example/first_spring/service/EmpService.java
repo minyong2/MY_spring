@@ -2,6 +2,7 @@ package com.example.first_spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,27 +101,20 @@ public class EmpService {
 	@Transactional(rollbackFor = {Exception.class})
 	public int setEmp(EmpVO vo) {
 	
-		EmpVO empVO = empMapper.selectDeptNo();
-		int deptNo = empVO.getDeptno();
-		vo.setDeptno(deptNo);
-		
+//		EmpVO empVO = empMapper.selectDeptNo();
+//		int deptNo = empVO.getDeptno();
+//		vo.setDeptno(deptNo);
+//		
 		//몇행 insert가 되었는지 리턴
 		int rows = empMapper.inserEmp(vo); 
 		return rows;
 	} 
 	
 	@Transactional(rollbackFor = {Exception.class})
-	public int getEmpRemoveCount(int sal) {
+	public int getEmpRemoveCount(int empno) {
 		List<EmpVO> list = new ArrayList<EmpVO>();
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i).getSal()>=sal) {
-				list.remove(i);
-			}
-			System.out.println(list.get(i).getSal());
-			
-		}
-		
-		int rows = empMapper.deleteEmp(sal);
+	
+		int rows = empMapper.deleteEmp(empno);
 		//몇행 delete가 되었는지 리턴
 		return rows;
 	}
@@ -160,5 +154,18 @@ public class EmpService {
 			return empMapper.updateEmpSal(vo);
 		}
 		return 0;
+	}
+	
+	public List<Map<String,Object>> getEmpMapList(){
+		return empMapper.selectEmpMapList();
+	}
+	
+	public int getDelete(int empno) {
+		return empMapper.getDelete(empno);
+	}
+	
+	public int getApi(int empno,EmpVO empvo) {
+		empvo.setEmpno(empno);
+		return empMapper.updateTest1(empvo);
 	}
 }

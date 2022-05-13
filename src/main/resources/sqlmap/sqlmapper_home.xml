@@ -1,0 +1,27 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.first_spring.mapper.HomeMapper">
+
+	<select id="getEnameSal" resultType="EmpVO">
+	select empno,ename,sal,deptno from emp
+	where deptno = 10 or deptno = 30 and sal > 1500
+	</select>
+	
+	<select id="getMgrNullEmpno" resultType="EmpVO">
+	select * from emp
+	where mgr is null
+	</select>
+	
+	<select id="getHiredateEmpno" resultType="EmpVO">
+	select * from emp
+	where DATE_FORMAT(HIREDATE, '%Y') = #{year}
+	</select>
+	
+	<select id="getDecTopSal" resultType="EmpVO">
+	select ename,sal from emp
+	where date_format(hiredate, '%m') = 12
+	</select>
+	
+
+
+
+</mapper>

@@ -1,11 +1,11 @@
 package com.example.first_spring.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.first_spring.vo.DeptVO;
 import com.example.first_spring.vo.EmpVO;
 
 /**
@@ -41,7 +41,7 @@ public interface EmpMapper {
 			);
 	
 	
-	public int deleteEmp(int sal); //데이터 삭제
+	public int deleteEmp(int empno); //데이터 삭제
 	public int updateEmp(EmpVO empvo); //emp데이터 수정
 	public int inserEmp(EmpVO empvo); //데이터 삽입v
 	
@@ -59,6 +59,11 @@ public interface EmpMapper {
 	//empno 조회하는거라 EmpVO ! EmpVO는 PK니까!
 	
 	public int updateEmpSal(EmpVO vo);
+	
+	public List<Map<String,Object>> selectEmpMapList();
+	
+	public int getDelete(int empno);
+	
 	
 	
 	

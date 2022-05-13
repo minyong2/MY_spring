@@ -1,8 +1,10 @@
 package com.example.first_spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,6 +23,7 @@ public class EmpController {
 	@Autowired
 	private EmpService empService;
 	
+	@CrossOrigin(origins = {"*"})
 	@GetMapping("/emp")
 	public List<EmpVO> callEmpList(){
 		
@@ -91,19 +94,21 @@ public class EmpController {
 	
 	//emp테이블에 insert 해보기
 	//@RequestBody가 파라미터로 넘어오는 VO를 대신 new 해줌
+	@CrossOrigin(origins = {"*"})
 	@PostMapping("/emp")
 	public int callEmpSet(@RequestBody EmpVO empvo) {
-		System.out.println("사원 이름은 : " + empvo.getEname());
-		System.out.println("사원 번호는 : " + empvo.getEmpno());
-		System.out.println("사원 직업은 : " + empvo.getJob());
+//		System.out.println("사원 이름은 : " + empvo.getEname());
+//		System.out.println("사원 번호는 : " + empvo.getEmpno());
+//		System.out.println("사원 직업은 : " + empvo.getJob());
 		return empService.setEmp(empvo);
 	}
 	
 	//@DeleteMapping : 데이터 삭제 시 사용
-	@DeleteMapping("/emp/sal/{sal}")
-	public int callEmpRemove(@PathVariable("sal") int sal) {
+	@CrossOrigin(origins = {"*"})
+	@DeleteMapping("/emp/empno/{empno}")
+	public int callEmpRemove(@PathVariable("empno") int empno) {
 		
-		return empService.getEmpRemoveCount(sal);
+		return empService.getEmpRemoveCount(empno);
 	}
 	
 	//	@PatchMapping : 자원 수정할 때 사용
@@ -147,8 +152,9 @@ public class EmpController {
 		return empService.getEmpMgr(isMgr);
 	}
 	
-	@PatchMapping("/emp/update")
-	public int updateTest1(@RequestBody EmpVO vo) {
+	@CrossOrigin(origins = {"*"})
+	@PatchMapping("/emp/{empno}")
+	public int updateTest1(@RequestBody EmpVO vo, @PathVariable("empno") int empno) {
 		return empService.updateTest1(vo);
 	}
 	
@@ -158,6 +164,23 @@ public class EmpController {
 		
 		return empService.getEmpUpdateCommSal(empno);
 		
+	}
+	@GetMapping("/emp/map/list")
+	public List<Map<String,Object>> callEmpMap(){
+		return empService.getEmpMapList();
+	}
+	
+	@CrossOrigin(origins = {"*"})
+	@DeleteMapping("/emp/delete/{empno}")
+public int callDelete(@PathVariable("empno") int empno) {
+		
+		return empService.getDelete(empno);
+	}
+	
+	@CrossOrigin(origins = {"*"})
+	@PatchMapping("/api/v1/list/{empno}")
+	public int callApi(@PathVariable("empno") int empno, @RequestBody EmpVO empvo) {
+		return empService.getApi(empno, empvo);
 	}
 	
 	

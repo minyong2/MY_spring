@@ -1,10 +1,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.first_spring.mapper.EmpMapper">
 	<select id="getEmpList" resultType="EmpVO">
-		SELECT empno,ename,job FROM emp
+		SELECT 
+			*
+		FROM emp e
+		ORDER BY empno asc;
+		
 	</select>
 		<select id="getEmp" resultType="EmpVO">
-	SELECT ename FROM emp
+	SELECT * FROM emp
 	WHERE empno = #{empNo}  
 	
 	</select>
@@ -185,6 +189,25 @@
 	WHERE empno = #{empno}
 	
 	</update>
+	
+	<select id="selectEmpMapList" resultType="map">
+	SELECT 
+		empno as "사원번호",
+		ename as "사원이름", 
+		job,
+		sal,
+		e.DEPTNO,
+		d.dname,
+		d.loc
+	FROM emp AS e
+	INNER JOIN dept AS d
+	ON e.deptno = d.deptno
+	</select>
+	
+	<delete id="getDelete">
+	DELETE FROM emp
+	WHERE empno = #{empno}
+	</delete>
 	
 
 
