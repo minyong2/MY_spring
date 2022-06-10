@@ -35,5 +35,9 @@ public class HomeService {
 		
 		return homeMapper.getDecTopSal(month);
 	}
+	
+	public List<EmpVO> selectJobManager(){
+		return homeMapper.selectJobManager();
+		}
 
 }

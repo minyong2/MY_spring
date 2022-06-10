@@ -22,4 +22,7 @@ public interface HomeMapper {
 	
 	//문제 3. 12월를 파라미터로 받고 해당 월에 입사한 사원 중 급여가 가장 많은 사원 조회
 	public List<EmpVO> getDecTopSal(int month);
+	
+	//문제 4. MANAGER를 파라미터로 받고 job이 MANAGER 중 입사날짜가 가장 빠른 사원의 이름, 입사날짜, 급여 조회 
+	public List<EmpVO> selectJobManager();
 }
